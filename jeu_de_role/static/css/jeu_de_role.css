@@ -1,0 +1,93 @@
+* { 
+    margin: 0;
+    padding: 0;
+    font-family: "Dela Gothic One";
+}
+
+.first {
+    height: 100vh;
+    background: url('/static/images/img1.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+}
+
+h2{
+    color: rgb(255, 255, 255); 
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+p {
+    color: rgb(255, 255, 255); 
+    font-size: 110%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+}
+
+.center {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.card{
+    background-color: rgba(13, 27, 13, 0.6);
+    margin-top: 0;
+    padding: 20px;    
+}
+
+.center a {
+    background-color: #2E8B57; 
+    text-decoration: none; 
+    color: white; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.center a:hover {
+    background-color: #2a6554; 
+    text-decoration: none; 
+}
+
+.card img {
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.card-text{
+    text-align: center;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #2E8B57;
+    color: white;
+}
+
+.nav-tabs .nav-link {
+    color: #2E8B57;
+}
+
+.btn-primary {
+    background-color: #2E8B57;
+    border-color: #2E8B57;
+}
+
+.btn-primary:hover {
+    background-color: #2a6554;
+}

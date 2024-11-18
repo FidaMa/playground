@@ -1,0 +1,25 @@
+{% extends 'jeu_de_role/explore.html' %}
+
+{% block title %}Détails du Personnage{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">{{ lieu.nom }}</h2>
+
+<div class="container mt-3">
+    <div class="card shadow-lg h-100 d-flex flex-column">
+        <img src="{{ lieu.photo.url }}" class="img-fluid mt-3 rounded d-block mx-auto" style="width: 320px;"  alt="{{ character.lieu.nom }}">
+        <div class="card-body text-center">
+            <p><strong></strong> {{ lieu.description}}</p>
+            <p><strong>Disponibilite :</strong> {{ lieu.disponibilite }}</p>
+            <p><strong>Niveau d'accés :</strong> {{ lieu.niveau_acces }}</p>
+            <p><strong>Capacité :</strong> {{ lieu.capacite_max }}</p>
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'explore' %}?tab=lieux" class="btn mt-4 btn-primary">Retour à la liste</a>
+    </div>
+</div>
+
+{% endblock %}

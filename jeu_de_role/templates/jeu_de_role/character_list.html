@@ -1,0 +1,22 @@
+{% block content %}
+
+<h2 class="text-center mb-4">Liste des Personnages</h2>
+{% if characters %}
+<div class="row g-2">
+    {% for character in characters %}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="card h-100">
+            <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ character.nom }}</h5>
+                <a href="{% url 'character_detail' character.id_character %}" class="btn btn-primary">Voir Détails</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-center">Aucun personnage disponible.</p>
+{% endif %}
+
+{% endblock %}

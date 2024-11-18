@@ -1,0 +1,51 @@
+{% extends 'jeu_de_role/explore.html' %}
+
+{% block title %}Détails du Personnage{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">{{ character.nom }}</h2>
+
+<div class="container mt-3">
+    <div class="row g-2">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card shadow-lg h-100 d-flex flex-column">
+                <img src="{{ character.photo.url }}" class="d-block img-fluid mx-auto mb-3" alt="{{ character.nom }}" >
+                <p class="card-text"><strong>Type:</strong> {{ character.type }}</p>
+                <p class="card-text"><strong>État :</strong> {{ character.etat }}</p>
+                <p class="card-text"><strong>Niveau:</strong> {{ character.niveau }}</p>
+                <p class="card-text"><strong>Équipe :</strong> {{ character.team }}</p>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card shadow-lg h-100 d-flex flex-column">
+                <div class="card-body">
+                    <p class="card-text"><strong>Lieu :</strong> {{ character.lieu.nom }}</p>
+                    <img src="{{ character.lieu.photo.url }}" class="img-fluid mt-2 rounded d-block mx-auto mb-2" alt="{{ character.lieu.nom }}">
+
+                    {% if message %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" class="text-center">{% csrf_token %}
+                        <p>Changer de lieu : {{ move_form.lieu }}</p> 
+                        <button type="submit" name="move" class="btn btn-primary">Déplacer</button>
+                    </form>
+
+                    <form method="POST" class="text-center mt-2">{% csrf_token %}
+                        <p>Changer de type : {{ type_form.type }}</p>
+                        <button type="submit" name="change_type" class="btn btn-primary">Changer</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'explore' %}" class="btn mt-4 btn-primary ">Retour à la liste</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% block content %}
+
+<h2 class="text-center mb-4">Liste des Lieux</h2>
+{% if lieux %}
+<div class="row g-2">
+    {% for lieu in lieux %}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="card h-100">
+            <img src="{{ lieu.photo.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ lieu.nom }}</h5>
+                <a href="{% url 'lieu_detail' lieu.pk %}" class="btn btn-primary">Voir Détails</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-center">Aucun lieu disponible pour le moment.</p>
+{% endif %}
+
+{% endblock %}
