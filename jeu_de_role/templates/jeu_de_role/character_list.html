@@ -10,10 +10,13 @@
             <div class="card-body">
                 <h5 class="card-title">{{ character.nom }}</h5>
                 <a href="{% url 'character_detail' character.id_character %}" class="btn btn-primary">Voir Détails</a>
+
+                <a href="{% url 'delete_character' character.id_character %}" class="btn btn-primary mt-3">Supprimer</a>
             </div>
         </div>
     </div>
     {% endfor %}
+    <a href="{% url 'add_character' %}" class="btn btn-primary">Ajouter un personnage</a>
 </div>
 {% else %}
 <p class="text-center">Aucun personnage disponible.</p>

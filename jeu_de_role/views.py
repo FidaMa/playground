@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .forms import MoveForm, ChangeTypeForm
 from .models import Lieu, Character
+from .forms import CharacterForm
+
 
 def home(request):
     return render(request, 'jeu_de_role/base.html')
@@ -90,3 +92,21 @@ def explore(request):
         'characters': characters,
         'lieux': lieux
     })
+
+def add_character(request):
+    if request.method == 'POST':
+        form = CharacterForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('explore')
+    else:
+        form = CharacterForm()
+
+    return render(request, 'jeu_de_role/add_character.html', {'form': form})
+
+def delete_character(request, character_id):
+    character = get_object_or_404(Character, pk=character_id)
+    character.delete()
+    return redirect('explore')  
+
+

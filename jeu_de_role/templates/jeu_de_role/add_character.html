@@ -1,0 +1,21 @@
+{% extends 'jeu_de_role/explore.html' %}
+
+{% block title %}Ajouter des Personnage{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">Ajouter Un Personnage</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </div>
+ 
+</form>
+<div class="text-center">
+    <a href="{% url 'explore' %}" class="btn btn-primary mt-3">Retour à la liste</a>
+</div>
+{% endblock %}
+    

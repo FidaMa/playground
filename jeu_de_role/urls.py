@@ -13,4 +13,8 @@ urlpatterns = [
     path('characters/', views.character_list, name='character_list'),
     
     path('explore/', views.explore, name='explore'),
+
+    path('add/', views.add_character, name='add_character'),
+    path('delete/<str:character_id>/', views.delete_character, name='delete_character'),
 ]
+

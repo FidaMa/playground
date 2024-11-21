@@ -13,4 +13,7 @@ class ChangeTypeForm(forms.ModelForm):
         model = Character
         fields = ['type']
 
- 
+class CharacterForm(forms.ModelForm):
+    class Meta:
+        model = Character
+        fields = ['id_character', 'nom', 'etat', 'niveau', 'type', 'team', 'photo', 'lieu']
