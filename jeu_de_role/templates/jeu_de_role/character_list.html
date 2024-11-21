@@ -1,5 +1,5 @@
 {% block content %}
-<h2 class="text-center mb-4">Liste des Personnages</h2>
+<h2 class="text-center mb-3">Liste des Personnages</h2>
 
 {% if page_obj_characters %}
 <div id="charactersCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -31,7 +31,7 @@
 </div>
 
 <!-- Pagination des personnages -->
-<div class="d-flex justify-content-center mt-3">
+<div class="d-flex justify-content-center mt-2">
   <div class="pagination">
     {% if page_obj_characters.has_previous %}
       <a href="?page_characters={{ page_obj_characters.previous_page_number }}" class="btn btn-lg">Précédente</a>
@@ -42,7 +42,7 @@
   </div>
 </div>
 
-<div class="text-center mt-4">
+<div class="text-center mt-1">
   <a href="{% url 'add_character' %}" class="btn btn-lg">Ajouter un personnage</a>
 </div>
 {% else %}

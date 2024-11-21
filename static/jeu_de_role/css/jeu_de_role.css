@@ -13,6 +13,8 @@
     align-items: center;
     justify-content: flex-start;
     padding-top: 50px;
+    overflow: hidden; /* Ajouté pour éviter que les éléments sortent */
+    position: relative; /* Ajouté pour mieux gérer la position de .center */
 }
 
 h2{
@@ -23,7 +25,7 @@ h2{
 
 p {
     color: rgb(255, 255, 255); 
-    font-size: 130%;
+    font-size: 18px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
 }
 
@@ -40,7 +42,7 @@ p {
 .card{
     background-color: rgba(13, 27, 13, 0.6);
     margin-top: 0;
-    padding: 20px;    
+    padding: 10px;
 }
 
 .center a {
@@ -58,7 +60,7 @@ p {
 }
 
 .card img {
-    height: 200px;
+    height: 220px;
     border-radius: 10px 10px 0 0;
     object-fit: cover;
 }
@@ -84,7 +86,7 @@ p {
 }
 
 .btn-lg {
-    font-size: 18px;;
+    font-size: 17px;;
     background-color: #2E8B57;
     border-color: #2E8B57;
 }
@@ -96,6 +98,7 @@ p {
 
 .carousel-control-prev,
 .carousel-control-next {
-  margin-left: -60px; /* Plus d'espace à gauche de la flèche précédente */
-  margin-right: -60px; /* Plus d'espace à droite de la flèche suivante */
+  margin-left: -60px; 
+  margin-right: -60px; 
 }
+
