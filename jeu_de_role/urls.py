@@ -15,9 +15,11 @@ urlpatterns = [
     path('explore/', views.explore, name='explore'),
 
     path('add/', views.add_character, name='add_character'),
-    path('delete/<str:character_id>/', views.delete_character, name='delete_character'),
+    path('delete-character/<str:character_id>/', views.delete_character, name='delete_character'),
 
     path('add_lieu/', views.add_lieu, name='add_lieu'),
+    path('delete-lieu/<str:lieu_id>/', views.delete_lieu, name='delete_lieu'),
+
 
 ]
 

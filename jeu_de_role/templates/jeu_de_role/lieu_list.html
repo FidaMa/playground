@@ -10,10 +10,14 @@
             <div class="card-body">
                 <h5 class="card-title">{{ lieu.nom }}</h5>
                 <a href="{% url 'lieu_detail' lieu.pk %}" class="btn btn-primary">Voir Détails</a>
+                <a href="{% url 'delete_lieu' lieu.id_lieu %}" class="btn btn-primary mt-3">Supprimer</a>
             </div>
         </div>
     </div>
     {% endfor %}
+    <div class="text-center mt-4">
+        <a href="{% url 'add_lieu' %}" class="btn btn-primary">Ajouter un Lieu</a>
+    </div>
 </div>
 {% else %}
 <p class="text-center">Aucun lieu disponible pour le moment.</p>

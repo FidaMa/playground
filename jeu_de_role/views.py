@@ -121,3 +121,7 @@ def add_lieu(request):
         form = LieuForm()
     return render(request, 'jeu_de_role/add_lieu.html', {'form': form})
 
+def delete_lieu(request, lieu_id):
+    lieu = get_object_or_404(Lieu, pk=lieu_id)
+    lieu.delete()
+    return redirect(f"{reverse('explore')}?tab=lieux")
