@@ -7,7 +7,7 @@
 
 <div class="container mt-3">
     <div class="card shadow-lg h-100 d-flex flex-column">
-        <img src="{{ lieu.photo.url }}" class="img-fluid mt-3 rounded d-block mx-auto" style="width: 320px;"  alt="{{ character.lieu.nom }}">
+        <img src="{{ lieu.photo.url }}" class="img-fluid mt-2 rounded d-block mx-auto" style="width: 320px;"  alt="{{ character.lieu.nom }}">
         <div class="card-body text-center">
             <p><strong></strong> {{ lieu.description}}</p>
             <p><strong>Disponibilite :</strong> {{ lieu.disponibilite }}</p>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="text-center">
-        <a href="{% url 'explore' %}?tab=lieux" class="btn mt-4 btn-lg">Retour à la liste</a>
+        <a href="{% url 'explore' %}?tab=lieux" class="btn mt-2 btn-lg">Retour à la liste</a>
     </div>
 </div>
 

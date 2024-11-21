@@ -33,7 +33,7 @@ def character_detail(request, id_character):
                 # Lister les personnages déjà présents dans ce lieu
                 personnages_dans_le_lieu = Character.objects.filter(lieu=nouveau_lieu).exclude(id_character=character.id_character)
                 noms_personnages = ", ".join([p.nom for p in personnages_dans_le_lieu])  # Supposons que chaque personnage ait un champ 'nom'
-                message = f"Le lieu est plein. Vous ne pouvez pas y accéder. Il est occupé par : {noms_personnages}."
+                message = f"Le lieu est plein. Il est occupé par : {noms_personnages}."
             else:
                 # Si toutes les vérifications passent, déplacer le personnage
                 ancien_lieu.disponibilite = (

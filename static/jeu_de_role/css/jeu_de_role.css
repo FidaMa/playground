@@ -6,15 +6,15 @@
 
 .first {
     height: 100vh;
-    background: url('/static/jeu_de_role/images/img1.jpg');
+    background-image: url('/static/jeu_de_role/images/img1.jpg');
+    background-position: center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding-top: 50px;
-    overflow: hidden; /* Ajouté pour éviter que les éléments sortent */
-    position: relative; /* Ajouté pour mieux gérer la position de .center */
+    overflow: hidden; 
 }
 
 h2{
@@ -42,7 +42,7 @@ p {
 .card{
     background-color: rgba(13, 27, 13, 0.6);
     margin-top: 0;
-    padding: 10px;
+    padding: 5px;
 }
 
 .center a {

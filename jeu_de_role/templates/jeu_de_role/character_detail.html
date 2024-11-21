@@ -21,10 +21,10 @@
             <div class="card shadow-lg h-100 d-flex flex-column">
                 <div class="card-body">
                     <p class="card-text"><strong>Lieu :</strong> {{ character.lieu.nom }}</p>
-                    <img src="{{ character.lieu.photo.url }}" class="img-fluid mt-2 rounded d-block mx-auto mb-2" alt="{{ character.lieu.nom }}">
+                    <img src="{{ character.lieu.photo.url }}" class="img-fluid mt-1 rounded d-block mx-auto mb-1" alt="{{ character.lieu.nom }}">
 
                     {% if message %}
-                    <div class="alert alert-danger mt-3" role="alert">
+                    <div class="alert alert-danger mt-2" role="alert">
                         {{ message }}
                     </div>
                     {% endif %}
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="text-center">
-        <a href="{% url 'explore' %}" class="btn mt-4 btn-lg">Retour à la liste</a>
+        <a href="{% url 'explore' %}" class="btn mt-2 btn-lg">Retour à la liste</a>
     </div>
 </div>
 
