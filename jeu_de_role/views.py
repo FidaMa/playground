@@ -3,26 +3,20 @@ from django.urls import reverse
 from .forms import MoveForm, ChangeTypeForm
 from .models import Lieu, Character
 from .forms import CharacterForm, LieuForm
+from django.core.paginator import Paginator
 
 
 def home(request):
     return render(request, 'jeu_de_role/base.html')
 
-def character_list(request):
-    characters = Character.objects.all()
-    return render(request, 'jeu_de_role/character_list.html', {'characters': characters})
-
 def character_detail(request, id_character):
-    # Récupérer le personnage à partir de la base de données
     character = get_object_or_404(Character, id_character=id_character)
-    # Initialiser les formulaires
     move_form = MoveForm(request.POST or None)
     type_form = ChangeTypeForm(request.POST or None) # Ne pas lier le formulaire à l'instance pour éviter les changements prématurés
     message = ""
 
     if request.method == "POST":
         if 'move' in request.POST and move_form.is_valid():
-            # Récupérer le lieu actuel du personnage
             ancien_lieu = get_object_or_404(Lieu, id_lieu=character.lieu.id_lieu)
 
             # Récupérer le nouveau lieu à partir du formulaire
@@ -78,50 +72,69 @@ def character_detail(request, id_character):
         'message': message
     })
 
-def lieu_list(request):
-    lieux = Lieu.objects.all()
-    return render(request, 'jeu_de_role/lieu_list.html', {'lieux': lieux})
-
 def lieu_detail(request, pk):
     lieu = get_object_or_404(Lieu, pk=pk)
     return render(request, 'jeu_de_role/lieu_detail.html', {'lieu': lieu})
 
 def explore(request):
     characters = Character.objects.all()
-    lieux = Lieu.objects.all()
+    lieux = Lieu.objects.all() 
+    
+    # Pagination pour les personnages
+    paginator_characters = Paginator(characters, 4)  # 4 personnages par page
+    page_number_characters = request.GET.get('page_characters')  # Récupérer la page pour les personnages
+    page_obj_characters = paginator_characters.get_page(page_number_characters)
+    
+    # Pagination pour les lieux
+    paginator_lieux = Paginator(lieux, 4)  # 4 lieux par page
+    page_number_lieux = request.GET.get('page_lieux')  # Récupérer la page pour les lieux
+    page_obj_lieux = paginator_lieux.get_page(page_number_lieux)
+
+    # Retourner les objets paginés au template
     return render(request, 'jeu_de_role/explore.html', {
-        'characters': characters,
-        'lieux': lieux
+        'page_obj_characters': page_obj_characters,
+        'page_obj_lieux': page_obj_lieux,
     })
 
 def add_character(request):
+    message = ""
     if request.method == 'POST':
         form = CharacterForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('explore')
+            character_name = form.cleaned_data['nom']  
+            if Character.objects.filter(nom=character_name).exists():
+                # Afficher un message d'erreur si le personnage existe déjà
+                message="Ce personnage existe déjà."
+            else:
+                form.save()
+                return redirect('explore')
     else:
         form = CharacterForm()
-
-    return render(request, 'jeu_de_role/add_character.html', {'form': form})
+    return render(request, 'jeu_de_role/add_character.html', {'form': form, 'message': message})
 
 def delete_character(request, character_id):
-    character = get_object_or_404(Character, pk=character_id)
+    character = get_object_or_404(Character, id_character=character_id)
     character.delete()
     return redirect('explore')  
 
 def add_lieu(request):
+    message=""
     if request.method == 'POST':
         form = LieuForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            # Utilisation de reverse pour générer l'URL
-            return redirect(f"{reverse('explore')}?tab=lieux")
+            lieu_name = form.cleaned_data['nom'] 
+            if Lieu.objects.filter(nom=lieu_name).exists():
+                # Afficher un message d'erreur si le lieu existe déjà
+                message="Ce lieu existe déjà."
+            else:
+                form.save()
+                return redirect(f"{reverse('explore')}?tab=lieux")
     else:
         form = LieuForm()
-    return render(request, 'jeu_de_role/add_lieu.html', {'form': form})
+    
+    return render(request, 'jeu_de_role/add_lieu.html', {'form': form,'message': message})
 
 def delete_lieu(request, lieu_id):
-    lieu = get_object_or_404(Lieu, pk=lieu_id)
+    lieu = get_object_or_404(Lieu, id_lieu=lieu_id)
     lieu.delete()
     return redirect(f"{reverse('explore')}?tab=lieux")

@@ -1,26 +1,53 @@
 {% block content %}
-
 <h2 class="text-center mb-4">Liste des Lieux</h2>
-{% if lieux %}
-<div class="row g-2">
-    {% for lieu in lieux %}
-    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <div class="card h-100">
-            <img src="{{ lieu.photo.url }}" class="card-img-top" alt="{{ lieu.nom }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ lieu.nom }}</h5>
-                <a href="{% url 'lieu_detail' lieu.pk %}" class="btn btn-primary">Voir Détails</a>
-                <a href="{% url 'delete_lieu' lieu.id_lieu %}" class="btn btn-primary mt-3">Supprimer</a>
-            </div>
+
+{% if page_obj_lieux %}
+<div id="lieuxCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-between">
+        {% for lieu in page_obj_lieux %}
+        <div class="card" style="width: 12rem; margin: 0 10px;">
+          <img src="{{ lieu.photo.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ lieu.nom }}</h5>
+          </div>
+          <a href="{% url 'lieu_detail' lieu.id_lieu %}" class="btn btn-lg">Voir Détails</a>
+          <a href="{% url 'delete_lieu' lieu.id_lieu %}" class="btn btn-lg mt-3">Supprimer</a>
         </div>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
-    <div class="text-center mt-4">
-        <a href="{% url 'add_lieu' %}" class="btn btn-primary">Ajouter un Lieu</a>
-    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#lieuxCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Précédent</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#lieuxCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Suivant</span>
+  </button>
 </div>
+
+<!-- Pagination des lieux -->
+<div class="d-flex justify-content-center mt-3">
+  <div class="pagination">
+    {% if page_obj_lieux.has_previous %}
+      <a href="?page_lieux={{ page_obj_lieux.previous_page_number }}&tab=lieux" class="btn btn-lg">Précédente</a>
+    {% endif %}
+    {% if page_obj_lieux.has_next %}
+      <a href="?page_lieux={{ page_obj_lieux.next_page_number }}&tab=lieux" class="btn btn-lg">Suivante</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'add_lieu' %}" class="btn btn-lg">Ajouter un Lieu</a>
+</div>
+
 {% else %}
-<p class="text-center">Aucun lieu disponible pour le moment.</p>
+<p class="text-center">Aucun lieu disponible.</p>
 {% endif %}
 
 {% endblock %}

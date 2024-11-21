@@ -31,12 +31,12 @@
 
                     <form method="POST" class="text-center">{% csrf_token %}
                         <p>Changer de lieu : {{ move_form.lieu }}</p> 
-                        <button type="submit" name="move" class="btn btn-primary">Déplacer</button>
+                        <button type="submit" name="move" class="btn btn-lg text-white">Déplacer</button>
                     </form>
 
                     <form method="POST" class="text-center mt-2">{% csrf_token %}
                         <p>Changer de type : {{ type_form.type }}</p>
-                        <button type="submit" name="change_type" class="btn btn-primary">Changer</button>
+                        <button type="submit" name="change_type" class="btn btn-lg text-white">Changer</button>
                     </form>
 
                 </div>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="text-center">
-        <a href="{% url 'explore' %}" class="btn mt-4 btn-primary ">Retour à la liste</a>
+        <a href="{% url 'explore' %}" class="btn mt-4 btn-lg">Retour à la liste</a>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 {% extends 'jeu_de_role/explore.html' %}
 
-{% block title %}Détails du Personnage{% endblock %}
+{% block title %}Détails des Lieux{% endblock %}
 
 {% block content %}
 <h2 class="text-center mb-4">{{ lieu.nom }}</h2>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="text-center">
-        <a href="{% url 'explore' %}?tab=lieux" class="btn mt-4 btn-primary">Retour à la liste</a>
+        <a href="{% url 'explore' %}?tab=lieux" class="btn mt-4 btn-lg">Retour à la liste</a>
     </div>
 </div>
 

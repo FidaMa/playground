@@ -1,23 +1,49 @@
 {% block content %}
-
 <h2 class="text-center mb-4">Liste des Personnages</h2>
-{% if characters %}
-<div class="row g-2">
-    {% for character in characters %}
-    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <div class="card h-100">
-            <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ character.nom }}</h5>
-                <a href="{% url 'character_detail' character.id_character %}" class="btn btn-primary">Voir Détails</a>
-                <a href="{% url 'delete_character' character.id_character %}" class="btn btn-primary mt-3">Supprimer</a>
-            </div>
+
+{% if page_obj_characters %}
+<div id="charactersCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-between">
+        {% for character in page_obj_characters %}
+        <div class="card" style="width: 12rem; margin: 0 10px;">
+          <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ character.nom }}</h5>
+          </div>
+          <a href="{% url 'character_detail' character.id_character %}" class="btn btn-lg">Voir Détails</a>
+          <a href="{% url 'delete_character' character.id_character %}" class="btn btn-lg mt-3">Supprimer</a>
         </div>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
-    <div class="text-center mt-4">
-        <a href="{% url 'add_character' %}" class="btn btn-primary">Ajouter un personnage</a>
-    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#charactersCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Précédent</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#charactersCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Suivant</span>
+  </button>
+</div>
+
+<!-- Pagination des personnages -->
+<div class="d-flex justify-content-center mt-3">
+  <div class="pagination">
+    {% if page_obj_characters.has_previous %}
+      <a href="?page_characters={{ page_obj_characters.previous_page_number }}" class="btn btn-lg">Précédente</a>
+    {% endif %}
+    {% if page_obj_characters.has_next %}
+      <a href="?page_characters={{ page_obj_characters.next_page_number }}" class="btn btn-lg">Suivante</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'add_character' %}" class="btn btn-lg">Ajouter un personnage</a>
 </div>
 {% else %}
 <p class="text-center">Aucun personnage disponible.</p>
