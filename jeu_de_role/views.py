@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404,redirect
+from django.urls import reverse
 from .forms import MoveForm, ChangeTypeForm
 from .models import Lieu, Character
-from .forms import CharacterForm
+from .forms import CharacterForm, LieuForm
 
 
 def home(request):
@@ -109,4 +110,14 @@ def delete_character(request, character_id):
     character.delete()
     return redirect('explore')  
 
+def add_lieu(request):
+    if request.method == 'POST':
+        form = LieuForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Utilisation de reverse pour générer l'URL
+            return redirect(f"{reverse('explore')}?tab=lieux")
+    else:
+        form = LieuForm()
+    return render(request, 'jeu_de_role/add_lieu.html', {'form': form})
 
