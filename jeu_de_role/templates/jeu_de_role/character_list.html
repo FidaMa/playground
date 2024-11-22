@@ -8,7 +8,7 @@
       <div class="row justify-content-center">
         {% for character in page_obj_characters %}
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card" style="margin: 10px; width: 100%; max-width: 14rem;">
+          <div class="card" style="width: 100%;">
             <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
             <div class="card-body">
               <h5 class="card-title">{{ character.nom }}</h5>
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<div class="text-center mt-1">
+<div class="text-center mt-3">
   <a href="{% url 'add_character' %}" class="btn btn-lg">Ajouter un personnage</a>
 </div>
 {% else %}

@@ -5,15 +5,17 @@
 <div id="lieuxCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="d-flex justify-content-between">
+      <div class="row justify-content-center">
         {% for lieu in page_obj_lieux %}
-        <div class="card" style="width: 12rem; margin: 0 10px;">
-          <img src="{{ lieu.photo.url }}" class="card-img-top" alt="{{ lieu.nom }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ lieu.nom }}</h5>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="width: 100%;">
+            <img src="{{ lieu.photo.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ lieu.nom }}</h5>
+            </div>
+            <a href="{% url 'lieu_detail' lieu.id_lieu %}" class="btn btn-lg">Voir Détails</a>
+            <a href="{% url 'delete_lieu' lieu.id_lieu %}" class="btn btn-lg mt-3">Supprimer</a>
           </div>
-          <a href="{% url 'lieu_detail' lieu.id_lieu %}" class="btn btn-lg">Voir Détails</a>
-          <a href="{% url 'delete_lieu' lieu.id_lieu %}" class="btn btn-lg mt-3">Supprimer</a>
         </div>
         {% endfor %}
       </div>
@@ -31,7 +33,7 @@
 </div>
 
 <!-- Pagination des lieux -->
-<div class="d-flex justify-content-center mt-3">
+<div class="d-flex justify-content-center mt-2">
   <div class="pagination">
     {% if page_obj_lieux.has_previous %}
       <a href="?page_lieux={{ page_obj_lieux.previous_page_number }}&tab=lieux" class="btn btn-lg">Précédente</a>

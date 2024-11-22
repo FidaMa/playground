@@ -102,14 +102,39 @@ def add_character(request):
         form = CharacterForm(request.POST, request.FILES)
         if form.is_valid():
             character_name = form.cleaned_data['nom']  
+            selected_lieu = form.cleaned_data['lieu']
+
+            # Vérification si le personnage existe déjà
             if Character.objects.filter(nom=character_name).exists():
-                # Afficher un message d'erreur si le personnage existe déjà
-                message="Ce personnage existe déjà."
+                message = "Ce personnage existe déjà."
+            
+            # Vérification du niveau d'accès du personnage pour le lieu
+            elif selected_lieu.niveau_acces > form.cleaned_data['niveau']:
+                message = "Niveau d'accès insuffisant pour entrer dans ce lieu."
+            
+            # Vérification si le lieu est déjà occupé (capacité maximale atteinte)
             else:
-                form.save()
-                return redirect('explore')
+                nb_personnages_dans_le_lieu = Character.objects.filter(lieu=selected_lieu).count()
+
+                if nb_personnages_dans_le_lieu >= selected_lieu.capacite_max:
+                    message = f"Le lieu {selected_lieu.nom} est déjà plein. Veuillez en choisir un autre."
+                else:
+                    # Sauvegarder le personnage
+                    form.save()
+
+                    # Mettre à jour la disponibilité du lieu
+                    nb_personnages_dans_le_lieu = Character.objects.filter(lieu=selected_lieu).count()
+                    selected_lieu.disponibilite = (
+                        "occupé" if nb_personnages_dans_le_lieu >= selected_lieu.capacite_max 
+                        else "libre"
+                    )
+                    selected_lieu.save()
+
+                    return redirect('explore')
+
     else:
         form = CharacterForm()
+
     return render(request, 'jeu_de_role/add_character.html', {'form': form, 'message': message})
 
 def delete_character(request, character_id):

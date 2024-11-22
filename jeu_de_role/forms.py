@@ -17,11 +17,14 @@ class CharacterForm(forms.ModelForm):
     class Meta:
         model = Character
         fields = ['id_character', 'nom', 'etat', 'niveau', 'type', 'team', 'photo', 'lieu']
+        widgets = {
+            'photo': forms.ClearableFileInput(attrs={'style': 'width: 340px',}),
+        }
 
 class LieuForm(forms.ModelForm):
     class Meta:
         model = Lieu
         fields = ['id_lieu', 'nom', 'description', 'type_lieu', 'disponibilite', 'niveau_acces', 'capacite_max', 'photo']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 3}),
+            'description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control',}),
         }
