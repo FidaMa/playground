@@ -12,7 +12,7 @@ def home(request):
 def character_detail(request, id_character):
     character = get_object_or_404(Character, id_character=id_character)
     move_form = MoveForm(request.POST or None)
-    type_form = ChangeTypeForm(request.POST or None) # Ne pas lier le formulaire à l'instance pour éviter les changements prématurés
+    type_form = ChangeTypeForm(request.POST or None)
     message = ""
 
     if request.method == "POST":
@@ -119,7 +119,6 @@ def add_character(request):
                 if nb_personnages_dans_le_lieu >= selected_lieu.capacite_max:
                     message = f"Le lieu {selected_lieu.nom} est déjà plein. Veuillez en choisir un autre."
                 else:
-                    # Sauvegarder le personnage
                     form.save()
 
                     # Mettre à jour la disponibilité du lieu
@@ -149,7 +148,6 @@ def add_lieu(request):
         if form.is_valid():
             lieu_name = form.cleaned_data['nom'] 
             if Lieu.objects.filter(nom=lieu_name).exists():
-                # Afficher un message d'erreur si le lieu existe déjà
                 message="Ce lieu existe déjà."
             else:
                 form.save()

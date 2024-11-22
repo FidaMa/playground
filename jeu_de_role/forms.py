@@ -12,7 +12,9 @@ class ChangeTypeForm(forms.ModelForm):
     class Meta:
         model = Character
         fields = ['type']
+    
 
+# Formulaire pour ajouter un personnage
 class CharacterForm(forms.ModelForm):
     class Meta:
         model = Character
@@ -21,6 +23,7 @@ class CharacterForm(forms.ModelForm):
             'photo': forms.ClearableFileInput(attrs={'style': 'width: 340px',}),
         }
 
+# Formulaire pour ajouter un lieu
 class LieuForm(forms.ModelForm):
     class Meta:
         model = Lieu
