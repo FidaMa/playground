@@ -4,17 +4,20 @@
     font-family: "Dela Gothic One";
 }
 
-.first {
-    height: 100vh;
+body {
     background-image: url('/static/jeu_de_role/images/img1.jpg');
-    background-position: center center;
     background-size: cover;
+    background-position: center; 
+    background-attachment: fixed; 
+    height: 100vh; 
+    margin: 0;
+}
+.first {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding-top: 50px;
-    overflow: hidden; 
 }
 
 h2{
@@ -42,7 +45,7 @@ p {
 .card{
     background-color: rgba(13, 27, 13, 0.6);
     margin-top: 0;
-    padding: 5px;
+    padding: 10px;
 }
 
 .center a {

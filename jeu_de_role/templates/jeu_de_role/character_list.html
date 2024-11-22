@@ -5,15 +5,17 @@
 <div id="charactersCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="d-flex justify-content-between">
+      <div class="row justify-content-center">
         {% for character in page_obj_characters %}
-        <div class="card" style="width: 12rem; margin: 0 10px;">
-          <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ character.nom }}</h5>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="margin: 10px; width: 100%; max-width: 14rem;">
+            <img src="{{ character.photo.url }}" class="card-img-top" alt="{{ character.nom }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ character.nom }}</h5>
+            </div>
+            <a href="{% url 'character_detail' character.id_character %}" class="btn btn-lg">Voir Détails</a>
+            <a href="{% url 'delete_character' character.id_character %}" class="btn btn-lg mt-3">Supprimer</a>
           </div>
-          <a href="{% url 'character_detail' character.id_character %}" class="btn btn-lg">Voir Détails</a>
-          <a href="{% url 'delete_character' character.id_character %}" class="btn btn-lg mt-3">Supprimer</a>
         </div>
         {% endfor %}
       </div>
